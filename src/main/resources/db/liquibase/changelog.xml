@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+
+    <changeSet id="1" author="airvip" runInTransaction="true">
+        <sqlFile dbms="mysql" stripComments="true" path="/sql/user.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="2" author="airvip" runInTransaction="true">
+        <sql dbms="mysql">
+            INSERT INTO `t_user`(mobile) VALUE('13108765051');
+        </sql>
+    </changeSet>
+    <changeSet id="3" author="airvip" runInTransaction="true">
+        <sql dbms="mysql">
+            ALTER TABLE `t_user` MODIFY COLUMN `update_time` datetime ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间' AFTER `create_time`;
+        </sql>
+    </changeSet>
+    <changeSet  id="4" author="airvip">
+        <sql>
+            ALTER TABLE `user`.`t_user` MODIFY COLUMN `balance` decimal(18, 2) NOT NULL DEFAULT 0.0 COMMENT '余额' AFTER `sex`;
+        </sql>
+    </changeSet>
+    <changeSet id="5" author="airvip">
+        <sql>
+            ALTER TABLE `user`.`t_user` ADD COLUMN `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '密码' AFTER `mobile`;
+        </sql>
+    </changeSet>
+    <changeSet id="6" author="airvip">
+        <sql>
+            ALTER TABLE `user`.`t_user` ADD COLUMN `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '用户名' AFTER `mobile`;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

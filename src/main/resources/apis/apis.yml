@@ -1,0 +1,501 @@
+openapi: 3.0.3
+info:
+  title: springboot3 base program
+  description: a template program based on OpenAPI 3.0
+  contact:
+    email: sdqhwzb@gmai.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: v0.0.1
+externalDocs:
+  description: more Swagger info
+  url: http://swagger.io
+servers:
+  - url: 'http://127.0.0.1:8900'
+    description: workflow by doc generate code
+tags:
+  - name: ping
+    description: Ping Test
+  - name: object-store
+    description: Object Store
+  - name: user
+    description: Client - Operations About User
+  - name: manage
+    description: Manage - Operations About User
+  - name: session
+    description: login and logout
+  - name: send-msg
+    description: send msg
+# user methods: getById |  updateById |  deleteById  | addOne | getPage |
+# admin methods: getByIdManage |  updateByIdManage | updateByIdsManage |  deleteByIdManage  | addOneManage | getPageManage
+# getPage method first param is pageNum , second param is pageSize
+paths:
+  /ping:
+    get:
+      tags:
+        - ping
+      summary: ping testing
+      description: ping api
+      operationId: ping
+      parameters:
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+            default: pong
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /send-mobile-code:
+    post:
+      tags:
+        - send-msg
+      summary: send msg code
+      description: send msg code api
+      operationId: sendMsgCode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendMsgOfMobileCodeDTO'
+      responses:
+        200:
+          description: OK
+  /download:
+    get:
+      tags:
+        - object-store
+      summary: get download
+      description: get download api
+      operationId: getDownload
+      parameters:
+        - name: filename
+          in: query
+          required: true
+          description: filename
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+  /get-batch-url:
+    put:
+      tags:
+        - object-store
+      summary: get batch url
+      description: get batch url api
+      operationId: getBatchUrl
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filenames:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectStoreBatchDTO'
+  /upload-multipart:
+    post:
+      tags:
+        - object-store
+      summary: object store
+      description: object store pi
+      operationId: uploadMultipart
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+            encoding:
+              files:
+                contentType: image/png, image/jpeg
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectStoreBatchDTO'
+  /manage/user:
+    put:
+      tags:
+        - manage
+      summary: update
+      description: update api
+      operationId: updateByIdsManage
+      requestBody:
+        description: update object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateSelectedDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseRespWithEffectiveCount'
+  /manage/user/export-excel:
+    post:
+      tags:
+        - manage
+      summary: export
+      description: export api
+      operationId: exportExcel
+      requestBody:
+        description: export object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserExportDTO'
+      responses:
+        '200':
+          description: OK
+          # content:
+          #   application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+          #     schema:
+          #       type: string
+          #       format: binary
+
+  /session/login:
+    post:
+      tags:
+        - session
+      summary: login
+      description: login api
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionLoginDTO'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResp'
+      security: []
+
+  /user:
+    post:
+      tags:
+        - user
+      summary: create
+      description: create api
+      operationId: addOne
+      requestBody:
+        description: create object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAddDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+    get:
+      tags:
+        - user
+      summary: get page
+      description: get page api
+      operationId: getPage
+      parameters:
+        - $ref: '#/components/parameters/PageNum'
+        - $ref: '#/components/parameters/PageSize'
+        - name: user_name
+          in: query
+          required: false
+          description: username
+          example: airvip
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPageDTO'
+  /user/{id}:
+    get:
+      tags:
+        - user
+      summary: get one
+      description: get one api
+      operationId: getById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id pk
+          example: 1
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+    put:
+      tags:
+        - user
+      summary: update
+      description: update api
+      operationId: updateById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id pk
+          example: 1
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseRespWithEffectiveCount'
+    delete:
+      tags:
+        - user
+      summary: delete
+      description: delete api
+      operationId: deleteById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id pk
+          example: 1
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseRespWithEffectiveCount'
+
+components:
+  # common parameters
+  parameters:
+    PageNum:
+      name: page_num
+      in: query
+      required: false
+      description: page number
+      example: 1
+      schema:
+        type: integer
+    PageSize:
+      name: page_size
+      in: query
+      required: false
+      description: page size
+      example: 20
+      schema:
+        type: integer
+  schemas:
+    # common data struction
+    BaseResp:
+      type: object
+      properties:
+        message:
+          type: string
+      title: BaseResp
+    BaseRespWithEffectiveCount:
+      allOf:
+        - $ref: '#/components/schemas/BaseResp'
+      type: object
+      properties:
+        effective_count:
+          type: integer
+          format: int32
+    OnePageData:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            total_size:
+              type: integer
+              example: 1000
+            page_num:
+              type: integer
+              example: 1
+            page_size:
+              type: integer
+              example: 20
+    # server data struction
+    SendMsgOfMobileCodeDTO:
+      type: object
+      properties:
+        mobile:
+          type: string
+          description: mobile
+      required:
+        - mobile
+    ObjectStoreBatchDTO:
+      description: multipart object store
+      type: object
+      properties:
+        urls:
+          type: array
+          description: url list
+          items:
+            type: string
+    UserUpdateSelectedDTO:
+      description: update seleccted ids
+      type: object
+      required:
+        - ids
+        - status
+      properties:
+        ids:
+          type: array
+          description: id list
+          items:
+            type: integer
+            format: int64
+        status:
+          type: integer
+          description: status
+    SessionLoginDTO:
+      description: login DTO
+      required:
+        - mobile
+        - password
+      properties:
+        mobile:
+          type: string
+          example: 13100000000
+          description: mobile number
+        password:
+          type: string
+          example: 123456
+          description: password
+    UserPageDTO:
+      description: user page list DTO
+      allOf:
+        - $ref: '#/components/schemas/OnePageData'
+        - type: object
+          properties:
+            list:
+              type: array
+              items:
+                $ref: '#/components/schemas/UserDTO'
+    UserUpdateDTO:
+      description: user update DTO
+      allOf:
+        - $ref: '#/components/schemas/UserAddDTO'
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+          example: 1.0
+          description: 余额
+    UserExportDTO:
+      description: user export DTO
+      type: object
+      properties:
+        user_name:
+          type: string
+          description: user name
+    UserAddDTO:
+      description: user add DTO
+      type: object
+      required:
+        - user_name
+        - mobile
+        - birthday
+      properties:
+        user_name:
+          type: string
+          example: airvip
+          description: username
+        mobile:
+          type: string
+          example: 13888888888
+          description: mobile
+        sex:
+          type: integer
+          example: 1
+          description: sex 1man 2woman 0unkonw
+        birthday:
+          type: string
+          example: 2020-01-01
+          description: birthday,i like use int,example 20220101
+    UserDTO:
+      description: user entity DTO
+      allOf:
+        - $ref: '#/components/schemas/UserAddDTO'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          description: PK
+        balance:
+          type: number
+          example: 1.0
+          description: balance
+        status:
+          type: integer
+          format: int32
+          example: 1
+          description: status 1enable 0disable
+        create_time:
+          type: string
+          format: date-time
+          description: create time
+  # 1) Define the security scheme type (HTTP bearer)
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+# 2) Apply the security globally to all operations
+security:
+  - bearerAuth: []
