@@ -1,12 +1,13 @@
 package wang.diff.scaffold.controller.admin;
 
-import diff.wang.user.server.controller.UserManageApi;
-import diff.wang.user.server.controller.model.BaseRespWithEffectiveCount;
-import diff.wang.user.server.controller.model.UserExportDTO;
-import diff.wang.user.server.controller.model.UserUpdateSelectedDTO;
+
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import wang.diff.scaffold.controller.UserManageApi;
+import wang.diff.scaffold.controller.model.BaseRespWithEffectiveCount;
+import wang.diff.scaffold.controller.model.UserExportDTO;
+import wang.diff.scaffold.controller.model.UserUpdateSelectedDTO;
 
 @RestController
 @Tag(name = "manage")
@@ -20,4 +21,5 @@ public class UserManageController implements UserManageApi {
     public ResponseEntity<BaseRespWithEffectiveCount> updateByIdsManage(UserUpdateSelectedDTO userUpdateSelectedDTO) {
         return null;
     }
+
 }

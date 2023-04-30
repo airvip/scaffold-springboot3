@@ -1,11 +1,11 @@
 package wang.diff.scaffold.controller.api;
 
-import diff.wang.user.server.controller.UserApi;
-import diff.wang.user.server.controller.model.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import wang.diff.scaffold.controller.UserApi;
+import wang.diff.scaffold.controller.model.*;
 import wang.diff.scaffold.service.IUserService;
 
 @RestController

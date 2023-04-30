@@ -1,11 +1,11 @@
 package wang.diff.scaffold.controller.common;
 
 
-import diff.wang.user.server.controller.SendMsgApi;
-import diff.wang.user.server.controller.model.SendMsgOfMobileCodeDTO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import wang.diff.scaffold.controller.SendMsgApi;
+import wang.diff.scaffold.controller.model.SendMsgOfMobileCodeDTO;
 
 @RestController
 @Tag(name = "send-msg")

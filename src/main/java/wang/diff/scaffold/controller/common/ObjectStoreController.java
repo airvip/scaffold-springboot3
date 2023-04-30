@@ -1,12 +1,12 @@
 package wang.diff.scaffold.controller.common;
 
-import diff.wang.user.server.controller.ObjectStoreApi;
-import diff.wang.user.server.controller.model.GetBatchUrlRequest;
-import diff.wang.user.server.controller.model.ObjectStoreBatchDTO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import wang.diff.scaffold.controller.ObjectStoreApi;
+import wang.diff.scaffold.controller.model.GetBatchUrlRequest;
+import wang.diff.scaffold.controller.model.ObjectStoreBatchDTO;
 
 import java.util.List;
 

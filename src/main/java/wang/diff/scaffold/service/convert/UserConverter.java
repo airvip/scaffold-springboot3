@@ -1,10 +1,10 @@
 package wang.diff.scaffold.service.convert;
 
 import com.github.pagehelper.PageInfo;
-import diff.wang.user.server.controller.model.OnePageDataPagination;
-import diff.wang.user.server.controller.model.UserDTO;
-import diff.wang.user.server.controller.model.UserPageDTO;
 import org.springframework.stereotype.Component;
+import wang.diff.scaffold.controller.model.OnePageDataPagination;
+import wang.diff.scaffold.controller.model.UserDTO;
+import wang.diff.scaffold.controller.model.UserPageDTO;
 import wang.diff.scaffold.entity.User;
 
 import java.text.SimpleDateFormat;

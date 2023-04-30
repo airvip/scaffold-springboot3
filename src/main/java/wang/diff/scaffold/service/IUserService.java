@@ -1,7 +1,7 @@
 package wang.diff.scaffold.service;
 
-import diff.wang.user.server.controller.model.UserDTO;
-import diff.wang.user.server.controller.model.UserPageDTO;
+import wang.diff.scaffold.controller.model.UserDTO;
+import wang.diff.scaffold.controller.model.UserPageDTO;
 import wang.diff.scaffold.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 

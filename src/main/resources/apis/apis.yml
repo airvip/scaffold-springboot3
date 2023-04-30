@@ -21,7 +21,7 @@ tags:
     description: Object Store
   - name: user
     description: Client - Operations About User
-  - name: manage
+  - name: user-manage
     description: Manage - Operations About User
   - name: session
     description: login and logout
@@ -139,7 +139,7 @@ paths:
   /manage/user:
     put:
       tags:
-        - manage
+        - user-manage
       summary: update
       description: update api
       operationId: updateByIdsManage
@@ -159,7 +159,7 @@ paths:
   /manage/user/export-excel:
     post:
       tags:
-        - manage
+        - user-manage
       summary: export
       description: export api
       operationId: exportExcel
