@@ -1,7 +1,9 @@
 package wang.diff.scaffold.service;
 
+import wang.diff.scaffold.controller.model.UserAddDTO;
 import wang.diff.scaffold.controller.model.UserDTO;
 import wang.diff.scaffold.controller.model.UserPageDTO;
+import wang.diff.scaffold.controller.model.UserUpdateDTO;
 import wang.diff.scaffold.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -19,5 +21,9 @@ public interface IUserService extends IService<User> {
     UserDTO getByMobile(String mobile);
 
     UserDTO getById(Long id);
+
+    Integer updateById(Long id, UserUpdateDTO payload);
+
+    UserDTO addOne(UserAddDTO userAddDTO);
 
 }
