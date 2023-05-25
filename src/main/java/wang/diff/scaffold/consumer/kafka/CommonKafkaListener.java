@@ -24,10 +24,10 @@ public class CommonKafkaListener {
 
     /**
      * 哈哈，感觉过度封装了，直接用也是一句话
-     * @param message
-     * @param clazz
-     * @return
-     * @param <T>
+     * @param message 消息
+     * @param clazz 类
+     * @return 返回
+     * @param <T> 类
      */
     private <T> T parse(String message, Class<T> clazz) {
         return JacksonUtils.parse(message,clazz);
