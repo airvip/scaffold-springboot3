@@ -27,6 +27,8 @@ public class SendMsgController implements SendMsgApi {
         sendVerificationCodeDTO.setMobile(sendMsgOfMobileCodeDTO.getMobile());
         sendVerificationCodeDTO.setCode(MiscUtils.generateRandomString());
         commonKafkaProducer.send(sendVerificationCodeDTO);
+
+
         return ResponseEntity.ok().build();
     }
 }

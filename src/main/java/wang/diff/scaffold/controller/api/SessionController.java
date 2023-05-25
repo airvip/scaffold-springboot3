@@ -10,6 +10,7 @@ import wang.diff.scaffold.common.component.JwtTools;
 import wang.diff.scaffold.controller.SessionApi;
 import wang.diff.scaffold.controller.model.BaseResp;
 import wang.diff.scaffold.controller.model.SessionLoginDTO;
+import wang.diff.scaffold.controller.model.UserAddDTO;
 import wang.diff.scaffold.controller.model.UserDTO;
 import wang.diff.scaffold.service.IUserService;
 
@@ -29,10 +30,16 @@ public class SessionController implements SessionApi {
     public ResponseEntity<BaseResp> login(SessionLoginDTO sessionLoginDTO) {
 
         log.info("this is a info information");
-        UserDTO user = userService.getByMobile(sessionLoginDTO.getMobile());
+        UserDTO user = userService.getByMobile(sessionLoginDTO.getMobile(), sessionLoginDTO.getPassword());
         List<String> role = new ArrayList<>();
         role.add("ADMIN");
         String token = JwtTools.createToken(user.getId().toString(), role);
         return ResponseEntity.ok(new BaseResp().message(token));
+    }
+
+    @Override
+    public ResponseEntity<UserDTO> register(UserAddDTO userAddDTO) {
+        final UserDTO userDTO = userService.addOne(userAddDTO);
+        return ResponseEntity.ok(userDTO);
     }
 }

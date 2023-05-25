@@ -5,7 +5,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import wang.diff.scaffold.common.exception.BizException;
+import wang.diff.scaffold.config.SecurityConfig;
 import wang.diff.scaffold.controller.model.UserAddDTO;
 import wang.diff.scaffold.controller.model.UserDTO;
 import wang.diff.scaffold.controller.model.UserPageDTO;
@@ -40,6 +42,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Resource
     private UserConverter userConverter;
 
+    @Resource
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public UserPageDTO getPage(Integer pageNum, Integer pageSize, String username) {
         PageHelper.startPage(pageNum, pageSize);
@@ -53,13 +58,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public UserDTO getByMobile(String mobile) {
+    public UserDTO getByMobile(String mobile, String password) {
         QueryWrapper<User> objectQueryWrapper = new QueryWrapper<>();
         objectQueryWrapper.eq(User.MOBILE, mobile);
         User user = userMapper.selectOne(objectQueryWrapper);
         if(user == null) {
             throw new BizException(HttpStatus.BAD_REQUEST, "user.400000", "用户不存在");
         }
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new BizException(HttpStatus.BAD_REQUEST, "user.400000", "用户密码不一致");
+        }
+
         return userConverter.convert2Dto(user);
     }
 
@@ -90,6 +99,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         final Date birthdayDate = Date.from(birthday.atStartOfDay(ZoneId.systemDefault()).toInstant());
         final User user = new User();
         user.setUserName(userAddDTO.getUserName());
+        user.setPassword(passwordEncoder.encode(userAddDTO.getPassword()));
         user.setMobile(userAddDTO.getMobile());
         user.setBirthday(birthdayDate);
         user.setSex(userAddDTO.getSex());

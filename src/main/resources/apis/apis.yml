@@ -198,7 +198,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/BaseResp'
       security: []
-
+  /session/register:
+    post:
+      tags:
+        - session
+      summary: register
+      description: register api
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAddDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
   /user:
     post:
       tags:
@@ -322,7 +340,7 @@ components:
     PageNum:
       name: page_num
       in: query
-      required: false
+      required: true
       description: page number
       example: 1
       schema:
@@ -330,7 +348,7 @@ components:
     PageSize:
       name: page_size
       in: query
-      required: false
+      required: true
       description: page size
       example: 20
       schema:
@@ -458,10 +476,14 @@ components:
           type: string
           example: 13888888888
           description: mobile
+        password:
+          type: string
+          example: 123456
+          description: password
         sex:
           type: integer
           example: 1
-          description: sex 1man 2woman 0unkonw
+          description: sex 1 man 2 woman 0 unknow
         birthday:
           type: string
           example: 2020-01-01

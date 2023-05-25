@@ -18,7 +18,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IUserService extends IService<User> {
     UserPageDTO getPage(Integer pageNum, Integer pageSize, String username);
 
-    UserDTO getByMobile(String mobile);
+    UserDTO getByMobile(String mobile, String password);
 
     UserDTO getById(Long id);
 
