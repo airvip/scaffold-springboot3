@@ -1,0 +1,1 @@
+package wang.diff.scaffold.consumer.kafka;

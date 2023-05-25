@@ -17,7 +17,8 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<UserDTO> addOne(UserAddDTO userAddDTO) {
-        return null;
+        final UserDTO userDTO = userService.addOne(userAddDTO);
+        return ResponseEntity.ok(userDTO);
     }
 
     @Override

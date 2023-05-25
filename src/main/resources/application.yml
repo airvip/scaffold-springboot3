@@ -1,6 +1,8 @@
 server.port: 8900
 
 spring:
+  profiles:
+    active: database,kafka,redis,store
   application:
     name: scaffold-server
   jackson:
@@ -8,25 +10,7 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     property-naming-strategy: SNAKE_CASE
     time-zone: Asia/Shanghai
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/user?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: root
-    password: 123456
-    hikari:
-      minimum-idle: 10
-      maximum-pool-size: 20
-      idle-timeout: 500000
-      max-lifetime: 540000
-      connection-timeout: 60000
-  liquibase:
-    enabled: true
-    change-log: classpath:/db/liquibase/changelog.xml
 
-
-mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 springdoc:
   api-docs:
@@ -54,3 +38,17 @@ page-helper:
   helper-dialect: mysql
   reasonable: true
   supportMethodsArguments: true
+
+
+logging:
+  level:
+    wang.diff.scaffold.dao: DEBUG # 看 sql
+    wang.diff.scaffold.controller: DEBUG
+  pattern:
+    level: debug
+#  file:
+#    name: user-server.log
+#    path: .
+
+#    root: debug
+#debug: true

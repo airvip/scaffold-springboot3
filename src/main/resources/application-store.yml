@@ -1,0 +1,20 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 200MB
+
+
+#s3:
+#  storage:
+#    accessKeyId: hUEA1XVWeO9ioHsp
+#    secretAccessKey: OD8ddwu8o4MiFf6Qi9bfTf6AzfAq1uEP
+#    endpoint: 192.168.226.136:9090
+#    bucketName: springboot
+
+minio:
+  endpoint: http://192.168.226.136:9000
+  access-key: hUEA1XVWeO9ioHsp
+  secret-key: OD8ddwu8o4MiFf6Qi9bfTf6AzfAq1uEP
+  bucket-name: springboot

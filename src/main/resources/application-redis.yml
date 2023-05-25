@@ -1,0 +1,14 @@
+spring:
+  data:
+    redis:
+      host: 192.168.226.136
+      port: 6379
+      database: 0
+      username:
+      password:
+      lettuce:
+        pool:
+          enabled: true
+          max-active: 8
+
+
