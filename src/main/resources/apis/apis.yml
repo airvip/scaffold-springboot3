@@ -52,6 +52,27 @@ paths:
             '*/*':
               schema:
                 type: string
+  /get-sentence:
+    get:
+      tags:
+        - ping
+      summary: get sentence
+      description: get sentence api
+      operationId: getSentence
+      parameters:
+        - name: encode
+          in: query
+          required: true
+          description: encode json
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
   /send-mobile-code:
     post:
       tags:
