@@ -1,4 +1,4 @@
-package wang.diff.scaffold.Util;
+package wang.diff.scaffold.util;
 
 import org.junit.jupiter.api.Test;
 
