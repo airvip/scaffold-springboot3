@@ -1,4 +1,4 @@
-package wang.diff.scaffold.util;
+package wang.diff.scaffold.common.util;
 
 import lombok.SneakyThrows;
 

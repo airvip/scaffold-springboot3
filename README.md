@@ -8,7 +8,7 @@
 之所以采用这种工作流方式是方便框架基础版本升级，在升级的时候只需要修改很少的代码就可完成项目升级。尤其是从 springboot2 升级到 springboot3，可以充分体会这种工作流的优势。
 
 # TODO
-1. 集成 jwt and interceptor
+1. kafka stream
 
 # 技术栈
 1. springboot3

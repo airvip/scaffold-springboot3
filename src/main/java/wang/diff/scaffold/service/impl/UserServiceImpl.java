@@ -1,22 +1,21 @@
 package wang.diff.scaffold.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import wang.diff.scaffold.common.exception.BizException;
-import wang.diff.scaffold.config.SecurityConfig;
 import wang.diff.scaffold.controller.model.UserAddDTO;
 import wang.diff.scaffold.controller.model.UserDTO;
 import wang.diff.scaffold.controller.model.UserPageDTO;
 import wang.diff.scaffold.controller.model.UserUpdateDTO;
-import wang.diff.scaffold.entity.User;
 import wang.diff.scaffold.dao.UserMapper;
+import wang.diff.scaffold.entity.User;
 import wang.diff.scaffold.service.IUserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 import wang.diff.scaffold.service.convert.UserConverter;
 
 import java.time.LocalDate;
