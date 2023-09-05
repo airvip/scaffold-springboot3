@@ -19,7 +19,7 @@ springdoc:
     groups:
       enabled: true
   swagger-ui:
-    #自定义 swagger 前端请求路径，输入 http：127.0.0.1:8080/swagger-ui 会自动重定向到 swagger 页面
+    #自定义 swagger 前端请求路径，输入 http：127.0.0.1:8900/swagger-ui 会自动重定向到 swagger 页面
     path: /swagger-ui
   #包扫描路径 wang.diff.scaffold.controller,wang.diff.scaffold.dto.request
   #  packages-to-scan: wang.diff.scaffold.controller

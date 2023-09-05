@@ -1,5 +1,6 @@
 spring:
   datasource:
+    # --------单库操作START----------
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.226.136:3307/scaffold-springboot3?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
@@ -10,33 +11,43 @@ spring:
       idle-timeout: 500000
       max-lifetime: 540000
       connection-timeout: 60000
-
-
-  dynamic: # 多数据源
-    primary: scaffold # 设置默认的数据源或者数据源组,默认值即为 master
-    strict: false # 严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
-    datasource:
-      scaffold:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://192.168.226.136:3307/scaffold-springboot3?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-        username: root
-        password: 123456
-      patient:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://192.168.226.136:3307/scaffold-springboot3?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-        username: root
-        password: 123456
-    hikari:
-      minimum-idle: 10
-      maximum-pool-size: 20
-      idle-timeout: 500000
-      max-lifetime: 540000
-      connection-timeout: 60000
-
+    # --------单库操作END----------
+    # --------说明：一旦配置了动态多数据源,上面的配置将不起作用----------
+    dynamic: # 多数据源
+      primary: user # 设置默认的数据源或者数据源组,默认值即为 master
+      strict: false # 严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      datasource:
+        user:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://192.168.226.136:3307/scaffold-springboot3?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+          username: root
+          password: 123456
+          hikari:
+            minimum-idle: 10
+            maximum-pool-size: 20
+            idle-timeout: 500000
+            max-lifetime: 540000
+            connection-timeout: 60000
+        shop:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://192.168.226.136:3307/scaffold-shop?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+          username: root
+          password: 123456
+        patient:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://192.168.226.136:3307/scaffold-patient?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+          username: root
+          password: 123456
+          hikari:
+            minimum-idle: 10
+            maximum-pool-size: 20
+            idle-timeout: 500000
+            max-lifetime: 540000
+            connection-timeout: 60000
 
 
   liquibase:
-    enabled: true
+    enabled: false
     change-log: classpath:/db/liquibase/changelog.xml
 
 

@@ -9,6 +9,8 @@
 
 # TODO
 1. kafka stream
+2. 监听redis过期key
+3. redis延时队列
 
 # 技术栈
 1. springboot3
@@ -25,6 +27,7 @@
 * [快速入门](https://baomidou.com/pages/24112f/)
 * [代码生成器（新）](https://baomidou.com/pages/779a6e/#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8)
 * [代码生成器配置新](https://baomidou.com/pages/981406/#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE-datasourceconfig)
+* [多数据源](https://baomidou.com/pages/a61e1b/#dynamic-datasource)
 5. github.pagehelper
 * [如何使用分页插件](https://pagehelper.github.io/docs/howtouse/)
 6. easyexcel
@@ -40,6 +43,8 @@
 * [Apache Kafka Reference](https://docs.spring.io/spring-kafka/docs/current/reference/html/#reference)
 10. jwt
 * [jjwt](https://github.com/jwtk/jjwt)
+
+
 
 # 打包运行
 

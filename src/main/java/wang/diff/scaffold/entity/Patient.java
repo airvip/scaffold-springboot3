@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -16,12 +16,12 @@ import lombok.Setter;
  * </p>
  *
  * @author airvip
- * @since 2023-04-24
+ * @since 2023-09-05
  */
 @Getter
 @Setter
-@TableName("t_user")
-public class User implements Serializable {
+@TableName("t_patient")
+public class Patient implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,40 +32,16 @@ public class User implements Serializable {
     private Long id;
 
     /**
-     * 电话
+     * 患者名
      */
-    @TableField("mobile")
-    private String mobile;
-
-    /**
-     * 用户名
-     */
-    @TableField("user_name")
-    private String userName;
-
-    /**
-     * 密码
-     */
-    @TableField("password")
-    private String password;
-
-    /**
-     * 出生日期
-     */
-    @TableField("birthday")
-    private Date birthday;
+    @TableField("name")
+    private String name;
 
     /**
      * 性别 0未知 1男 2女
      */
     @TableField("sex")
-    private Integer sex;
-
-    /**
-     * 余额
-     */
-    @TableField("balance")
-    private BigDecimal balance;
+    private Byte sex;
 
     /**
      * 1启用 0禁用
@@ -87,17 +63,9 @@ public class User implements Serializable {
 
     public static final String ID = "id";
 
-    public static final String MOBILE = "mobile";
-
-    public static final String USER_NAME = "user_name";
-
-    public static final String PASSWORD = "password";
-
-    public static final String BIRTHDAY = "birthday";
+    public static final String NAME = "name";
 
     public static final String SEX = "sex";
-
-    public static final String BALANCE = "balance";
 
     public static final String STATUS = "status";
 

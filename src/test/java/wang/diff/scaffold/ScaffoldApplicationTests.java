@@ -13,14 +13,17 @@ import java.util.Collections;
 @SpringBootTest
 class ScaffoldApplicationTests {
 
-	@Value("${spring.datasource.url}")
+//	@Value("${spring.datasource.url}")
+	@Value("${spring.datasource.dynamic.datasource.patient.url}")
 	private String url;
 
-	@Value("${spring.datasource.username}")
+//	@Value("${spring.datasource.username}")
+	@Value("${spring.datasource.dynamic.datasource.patient.username}")
 	private String username;
 
 
-	@Value("${spring.datasource.password}")
+//	@Value("${spring.datasource.password}")
+	@Value("${spring.datasource.dynamic.datasource.patient.password}")
 	private String password;
 
 	private final String projectPath = System.getProperty("user.dir");
@@ -48,7 +51,7 @@ class ScaffoldApplicationTests {
 							.pathInfo(Collections.singletonMap(OutputFile.xml, projectPath + "\\src\\main\\resources\\db\\mapper")); // 设置mapperXml生成路径
 				})
 				.strategyConfig(builder -> {
-					builder.addInclude("t_user") // 设置需要生成的表名
+					builder.addInclude("t_patient") // 设置需要生成的表名
 							.addTablePrefix("t_", "c_")// 设置过滤表前缀
 							.entityBuilder()
 							.enableLombok() // 开启 lombok 模型
