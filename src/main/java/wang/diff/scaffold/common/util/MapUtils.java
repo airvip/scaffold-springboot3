@@ -17,10 +17,10 @@ public class MapUtils {
 
     /**
      * 计算两个坐标点之间的距离
-     * @param lat1 坐标点1的纬度
-     * @param lng1 坐标点1的经度
-     * @param lat2 坐标点2的纬度
-     * @param lng2 坐标点2的经度
+     * @param lat1 坐标点1的纬度 24.921897,
+     * @param lng1 坐标点1的经度 102.581018
+     * @param lat2 坐标点2的纬度 25.030337
+     * @param lng2 坐标点2的经度 102.645966
      * @return 距离 （千米）
      */
     public static double getDistance(double lat1, double lng1, double lat2, double lng2) {
@@ -37,8 +37,8 @@ public class MapUtils {
 
     /**
      * 计算两个坐标点的距离
-     * @param startPoint 开始坐标点
-     * @param endPoint 结束坐标点
+     * @param startPoint 开始坐标点 24.921897,102.581018 纬度,经度
+     * @param endPoint 结束坐标点  25.030337,102.645966 纬度，经度
      * @return 距离 (千米)
      */
     public static double getPointDistance(String startPoint, String endPoint) {
