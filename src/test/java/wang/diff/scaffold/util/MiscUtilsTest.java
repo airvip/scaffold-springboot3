@@ -1,8 +1,11 @@
 package wang.diff.scaffold.util;
 
 import org.junit.jupiter.api.Test;
+import wang.diff.scaffold.common.util.MiscUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MiscUtilsTest {
 
@@ -47,4 +50,16 @@ public class MiscUtilsTest {
         final String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(l);
         System.out.println(format);
     }
+
+    @Test
+    public void test5() {
+        final Set<String> orderSet = new HashSet<>();
+        for (int i = 0; i < 100; i++) {
+            final String order = MiscUtils.genOrderNo("Air");
+            System.out.println(order);
+            orderSet.add(order);
+        }
+        System.out.println(orderSet.size());
+    }
+
 }

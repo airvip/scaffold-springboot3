@@ -1,5 +1,6 @@
 package wang.diff.scaffold.common.util;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 
 import java.math.BigDecimal;
@@ -12,7 +13,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class MiscUtils {
     /**
@@ -39,16 +39,20 @@ public class MiscUtils {
     /**
      * 生成订单
      * @param prefix 前缀
-     * @return yyyyMMddHHmmss+6位随机数
+     * @return yyyyMMdd HH:mm:ss+ 随机数 + 纳秒
      */
     public static String genOrderNo(String prefix) {
-        String yyyyMMddHHmmss = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        int i = ThreadLocalRandom.current().nextInt(1000);
-        String s = String.valueOf(i);
-        long l = System.currentTimeMillis();
-        String s1 = String.valueOf(l);
-        String sub = s1.substring(0, s1.length() - 4);
-        return prefix + yyyyMMddHHmmss + s + sub;
+        String yyMMdd = DateUtil.format(new Date(), "yyMMddHHmmss");
+        int randomInt = (int) (Math.random() * 1000);
+        String randomString = Integer.toString(randomInt);
+        if(randomInt < 10) {
+            randomString = "00" + randomString;
+        }else if (randomInt < 100) {
+            randomString = "0" + randomString;
+        }
+        String nanoTime = Long.toString(System.nanoTime());
+        String nanoTimeString = nanoTime.substring(6, 12);
+        return prefix + yyMMdd + randomString + nanoTimeString;
     }
 
     /**
