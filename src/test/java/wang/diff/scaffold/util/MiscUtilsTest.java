@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import wang.diff.scaffold.common.util.MiscUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -60,6 +61,19 @@ public class MiscUtilsTest {
             orderSet.add(order);
         }
         System.out.println(orderSet.size());
+    }
+
+
+    @Test
+    public void test6() {
+        String s = "订单:${orderNo},姓名:${name}";
+        final HashMap<String, String> map = new HashMap<>();
+        map.put("orderNo", "123456");
+        map.put("name", "张三");
+        map.put("test", "test");
+
+        final String s1 = MiscUtils.StringFormat(s, map);
+        System.out.println(s1);
     }
 
 }

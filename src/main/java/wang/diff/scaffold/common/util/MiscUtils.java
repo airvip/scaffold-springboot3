@@ -12,7 +12,10 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MiscUtils {
     /**
@@ -118,5 +121,24 @@ public class MiscUtils {
      */
     public static String feeFormat(Long fee) {
         return new BigDecimal(fee).divide(new BigDecimal(100), 2, RoundingMode.UP).toString();
+    }
+
+    /**
+     * 字符串格式话
+     * @param format 需要格式化的字符串 "姓名:${name},年龄:${age}"
+     * @param map 传入的参数 {"name":"阿尔维奇","age":"18","sex":"男"}
+     * @return 格式化后的字符串
+     */
+    public static String StringFormat(String format, Map<String,String> map) {
+        String reg = "\\$\\{(\\w+)}";
+        Pattern pattern = Pattern.compile(reg);
+        final Matcher matcher = pattern.matcher(format);
+        final StringBuilder stringBuilder = new StringBuilder();
+        while (matcher.find()) {
+            final String value = map.get(matcher.group(1));
+            matcher.appendReplacement(stringBuilder, value == null ? "" : value);
+        }
+        matcher.appendTail(stringBuilder);
+        return stringBuilder.toString();
     }
 }
