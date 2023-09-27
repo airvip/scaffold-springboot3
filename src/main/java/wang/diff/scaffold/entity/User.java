@@ -4,13 +4,14 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * <p>
@@ -23,6 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("t_user")
+@Document(indexName = "user")
 public class User implements Serializable {
 
 

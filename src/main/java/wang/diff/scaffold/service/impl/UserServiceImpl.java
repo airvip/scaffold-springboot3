@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Resource
     private PasswordEncoder passwordEncoder;
+
+
+    @Resource
+    private ElasticsearchOperations elasticsearchOperations;
 
     @Override
     public UserPageDTO getPage(Integer pageNum, Integer pageSize, String username) {
@@ -102,6 +107,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         user.setMobile(userAddDTO.getMobile());
         user.setBirthday(birthdayDate);
         user.setSex(userAddDTO.getSex());
+
+        elasticsearchOperations.save(user);
 
         userMapper.insert(user);
         return userConverter.convert2Dto(user);
