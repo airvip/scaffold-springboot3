@@ -33,6 +33,9 @@ springdoc:
     - group: common
       packages-to-scan:
         - wang.diff.scaffold.controller.common #按包路径匹配
+    - group: crond
+      packages-to-scan:
+        - wang.diff.scaffold.controller.crond #按包路径匹配
 
 page-helper:
   helper-dialect: mysql

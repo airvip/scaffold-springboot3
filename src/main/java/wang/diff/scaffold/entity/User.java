@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -46,6 +47,7 @@ public class User implements Serializable {
      * 用户名
      */
     @TableField("user_name")
+    @Field(name =  "user_name")
     private String userName;
 
     /**
@@ -82,12 +84,14 @@ public class User implements Serializable {
      * 创建时间
      */
     @TableField("create_time")
+    @Field(name =  "create_time")
     private Date createTime;
 
     /**
      * 更新时间
      */
     @TableField("update_time")
+    @Field(name =  "update_time")
     private Date updateTime;
 
     public static final String ID = "id";

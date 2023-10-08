@@ -5,10 +5,17 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.SearchHit;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.Criteria;
+import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
+import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import wang.diff.scaffold.common.enums.CommonStatus;
 import wang.diff.scaffold.common.exception.BizException;
 import wang.diff.scaffold.controller.model.UserAddDTO;
 import wang.diff.scaffold.controller.model.UserDTO;
@@ -101,17 +108,59 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public UserDTO addOne(UserAddDTO userAddDTO) {
         LocalDate birthday = LocalDate.parse(userAddDTO.getBirthday(), DateTimeFormatter.ISO_LOCAL_DATE);
         final Date birthdayDate = Date.from(birthday.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        final QueryWrapper<User> objectQueryWrapper = new QueryWrapper<>();
+        objectQueryWrapper.eq(User.MOBILE, userAddDTO.getMobile());
+        objectQueryWrapper.eq(User.STATUS, CommonStatus.NORMAL.getCode());
+        User userDb = userMapper.selectOne(objectQueryWrapper);
+        if(userDb != null) {
+            throw new BizException(HttpStatus.BAD_REQUEST, "user.400000", "用户已存在");
+        }
+
         final User user = new User();
         user.setUserName(userAddDTO.getUserName());
         user.setPassword(passwordEncoder.encode(userAddDTO.getPassword()));
         user.setMobile(userAddDTO.getMobile());
         user.setBirthday(birthdayDate);
         user.setSex(userAddDTO.getSex());
+        userMapper.insert(user);
+
 
         elasticsearchOperations.save(user);
-
-        userMapper.insert(user);
         return userConverter.convert2Dto(user);
+    }
+
+    @Override
+    public List<UserDTO> searchUser(String username, String mobile) {
+
+        final Criteria criteria = new Criteria(User.USER_NAME).contains(username);
+        criteria.and(new Criteria(User.MOBILE).contains(mobile));
+
+        final Query query = new CriteriaQuery(criteria);
+
+        final Sort sort = Sort.by(User.ID).descending()
+                .and(Sort.by(User.CREATE_TIME).descending());
+
+        query.addSort(sort);
+
+        final SearchHits<User> search = elasticsearchOperations.search(query, User.class);
+        final List<SearchHit<User>> searchHits = search.getSearchHits();
+
+        if(searchHits.isEmpty())
+            throw new BizException(HttpStatus.BAD_REQUEST, "user.400000", "用户不存在");
+
+        return searchHits.stream().map(searchHit -> {
+            User user = searchHit.getContent();
+            return userConverter.convert2Dto(user);
+        }).toList();
+    }
+
+    @Override
+    public void syncUserToEs() {
+        final List<User> userList = userMapper.selectList(null);
+        for (User user : userList) {
+            elasticsearchOperations.save(user);
+        }
     }
 
 

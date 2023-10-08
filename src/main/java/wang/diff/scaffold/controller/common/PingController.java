@@ -8,10 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import wang.diff.scaffold.controller.PingApi;
+import wang.diff.scaffold.controller.model.UserDTO;
 import wang.diff.scaffold.dto.request.KafkaSyncHelloReqDTO;
 import wang.diff.scaffold.dto.request.KafkaSyncSayReqDTO;
 import wang.diff.scaffold.producer.kafka.SyncKafkaProducer;
+import wang.diff.scaffold.service.IUserService;
 
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -24,6 +27,9 @@ public class PingController implements PingApi {
 
     @Resource
     private RestTemplate restTemplate;
+
+    @Resource
+    private IUserService userService;
 
     private String urlForHitokoto = "https://v1.hitokoto.cn/";
 
@@ -53,4 +59,10 @@ public class PingController implements PingApi {
 
         return ResponseEntity.ok("ping pong");
     }
+
+    @Override
+    public ResponseEntity<List<UserDTO>> searchUser(String name, String mobile) {
+        return ResponseEntity.ok(userService.searchUser(name, mobile));
+    }
+
 }

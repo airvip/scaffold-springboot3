@@ -7,6 +7,8 @@ import wang.diff.scaffold.controller.model.UserUpdateDTO;
 import wang.diff.scaffold.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户表 服务类
@@ -25,5 +27,9 @@ public interface IUserService extends IService<User> {
     Integer updateById(Long id, UserUpdateDTO payload);
 
     UserDTO addOne(UserAddDTO userAddDTO);
+
+    List<UserDTO> searchUser(String username, String mobile);
+
+    void syncUserToEs();
 
 }

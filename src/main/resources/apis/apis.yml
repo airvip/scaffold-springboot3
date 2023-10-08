@@ -15,6 +15,8 @@ servers:
   - url: 'http://127.0.0.1:8900'
     description: workflow by doc generate code
 tags:
+  - name: crond
+    description: crond api
   - name: ping
     description: Ping Test
   - name: session
@@ -42,6 +44,46 @@ tags:
 # admin methods: getByIdManage |  updateByIdManage | updateByIdsManage |  deleteByIdManage  | addOneManage | getPageManage
 # getPage method first param is pageNum , second param is pageSize
 paths:
+  /crond/sync-user:
+    get:
+      tags:
+        - crond
+      summary: sync user
+      description: sync user
+      operationId: syncUser
+      responses:
+        200:
+          description: OK
+  /common/search/user:
+    get:
+      tags:
+        - ping
+      summary: ping testing search user
+      description: search user
+      operationId: searchUser
+      parameters:
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+            default: airvip
+        - name: mobile
+          in: query
+          required: false
+          schema:
+            type: string
+            default: 18888888888
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDTO'
+      security: []
   /ping:
     get:
       tags:
@@ -63,6 +105,7 @@ paths:
             '*/*':
               schema:
                 type: string
+      security: []
   /get-sentence:
     get:
       tags:
@@ -84,6 +127,7 @@ paths:
             application/json:
               schema:
                 type: string
+      security: []
   /send-mobile-code:
     post:
       tags:
