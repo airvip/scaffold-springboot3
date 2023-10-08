@@ -1,4 +1,4 @@
-package wang.diff.scaffold.controller.api;
+package wang.diff.scaffold.controller.customer;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;

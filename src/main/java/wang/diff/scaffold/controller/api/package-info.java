@@ -1,1 +1,0 @@
-package wang.diff.scaffold.controller.api;

@@ -1,4 +1,4 @@
-package wang.diff.scaffold.controller.admin;
+package wang.diff.scaffold.controller.manage;
 
 
 import com.alibaba.excel.EasyExcel;
