@@ -1,6 +1,6 @@
 spring:
   kafka:
-    bootstrap-servers: "192.168.226.136:9092"
+    bootstrap-servers: "172.21.170.170:9092"
     consumer:
       group-id: "spring-kafka"
       #      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer

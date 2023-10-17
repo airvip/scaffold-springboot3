@@ -1,9 +1,13 @@
 package wang.diff.scaffold.util;
 
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 import org.junit.jupiter.api.Test;
 import wang.diff.scaffold.common.util.MiscUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,12 +39,16 @@ public class MiscUtilsTest {
 
     @Test
     public void test4() {
-        String s1 = "11:30";
+        String s1 = "11:10";
         final String s2 = new SimpleDateFormat("HH:mm").format(System.currentTimeMillis());
         String s3 = "11:20:10";
-        final int i = s1.compareTo(s2);
-        int i1 = s1.compareTo(s3);
+        final int i = s1.compareTo(s3);
+//        int i1 = s1.compareTo(s3);
         System.out.println(i);
+
+        /*String s = null;
+        final Integer integer = Integer.valueOf(s);
+        System.out.println(integer);*/
 
     }
 
@@ -50,6 +58,12 @@ public class MiscUtilsTest {
         Long l = 1693576800000L;
         final String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(l);
         System.out.println(format);
+
+        String s = "1,2,3";
+        final String[] split = s.split(",");
+        System.out.println(split.length);
+        System.out.println(Arrays.stream(split).toList());
+
     }
 
     @Test
@@ -74,6 +88,17 @@ public class MiscUtilsTest {
 
         final String s1 = MiscUtils.StringFormat(s, map);
         System.out.println(s1);
+    }
+
+
+    @Test
+    public void test7() {
+        DateTime startDate = DateUtil.parse("2023-10-17", "yyyy-MM-dd");
+        final String beginDate = DateUtil.format(startDate, "yyyy-MM-dd");
+        DateTime realEndDate = startDate.offset(DateField.MONTH, 2);
+        final String endDate = DateUtil.format(realEndDate, "yyyy-MM-dd");
+        System.out.println(beginDate);
+        System.out.println(endDate);
     }
 
 }

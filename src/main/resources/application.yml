@@ -2,7 +2,7 @@ server.port: 8900
 
 spring:
   profiles:
-    active: database,kafka,redis,store,elasticsearch
+    active: database,kafka,redis,store #,elasticsearch
   application:
     name: scaffold-server
   jackson:
