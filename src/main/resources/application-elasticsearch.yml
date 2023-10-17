@@ -1,8 +1,6 @@
 spring:
   elasticsearch:
-    uris: 192.168.1.227:9200
-    username: elastic
-    password: bl8ydfJJgq
+    uris: 127.0.0.1:9200
 
 
 logging:

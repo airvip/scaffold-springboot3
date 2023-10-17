@@ -26,10 +26,10 @@ springdoc:
   group-configs:
     - group: admin #分组名
       packages-to-scan:
-        - wang.diff.scaffold.controller.admin #按路径匹配
+        - wang.diff.scaffold.controller.manage #按路径匹配
     - group: user #分组名
       packages-to-scan:
-        - wang.diff.scaffold.controller.api
+        - wang.diff.scaffold.controller.customer
     - group: common
       packages-to-scan:
         - wang.diff.scaffold.controller.common #按包路径匹配

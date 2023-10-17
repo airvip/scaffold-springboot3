@@ -31,6 +31,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -151,8 +152,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
         return searchHits.stream().map(searchHit -> {
             User user = searchHit.getContent();
-            return userConverter.convert2Dto(user);
-        }).toList();
+            final UserDTO userDTO = userConverter.convert2Dto(user);
+            return userDTO;
+        }).collect(Collectors.toList());
     }
 
     @Override

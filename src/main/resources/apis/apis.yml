@@ -25,17 +25,14 @@ tags:
     description: send msg
   - name: object-store
     description: Object Store
-
   - name: user
     description: Client - Operations About User
   - name: user-manage
     description: Manage - Operations About User
-
   - name: shop
     description: Client - Operations About Shop
   - name: shop-manage
     description: Manage - Operations About Shop
-
   - name: patient
     description: Client - Operations About Patient
   - name: patient-manage
@@ -80,9 +77,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/UserDTO'
+                $ref: '#/components/schemas/SearchUserResponseDTO'
       security: []
   /ping:
     get:
@@ -738,6 +733,14 @@ components:
           type: string
           example: 2020-01-01
           description: birthday,i like use int,example 20220101
+    SearchUserResponseDTO:
+      description: search user response DTO
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDTO'
     UserDTO:
       description: user entity DTO
       allOf:
