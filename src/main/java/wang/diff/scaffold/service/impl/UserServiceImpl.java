@@ -150,11 +150,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if(searchHits.isEmpty())
             throw new BizException(HttpStatus.BAD_REQUEST, "user.400000", "用户不存在");
 
-        return searchHits.stream().map(searchHit -> {
+        return searchHits.stream().map(searchHit -> userConverter.convert2Dto(searchHit.getContent())).collect(Collectors.toList());
+
+        /*return searchHits.stream().map(searchHit -> {
             User user = searchHit.getContent();
-            final UserDTO userDTO = userConverter.convert2Dto(user);
-            return userDTO;
-        }).collect(Collectors.toList());
+            return userConverter.convert2Dto(user);
+        }).collect(Collectors.toList());*/
     }
 
     @Override

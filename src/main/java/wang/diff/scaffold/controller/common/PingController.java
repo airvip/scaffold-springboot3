@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import wang.diff.scaffold.controller.PingApi;
-import wang.diff.scaffold.controller.model.SearchUserResponseDTO;
 import wang.diff.scaffold.controller.model.UserDTO;
 import wang.diff.scaffold.dto.request.KafkaSyncHelloReqDTO;
 import wang.diff.scaffold.dto.request.KafkaSyncSayReqDTO;
@@ -62,12 +61,18 @@ public class PingController implements PingApi {
     }
 
     @Override
+    public ResponseEntity<List<UserDTO>> searchUser(String name, String mobile) {
+        final List<UserDTO> userDTOS = userService.searchUser(name, mobile);
+        return ResponseEntity.ok(userDTOS);
+    }
+
+    /*@Override
     public ResponseEntity<SearchUserResponseDTO> searchUser(String name, String mobile) {
         final SearchUserResponseDTO searchUserResponseDTO = new SearchUserResponseDTO();
         final List<UserDTO> userDTOList = userService.searchUser(name, mobile);
         searchUserResponseDTO.setList(userDTOList);
         return ResponseEntity.ok(searchUserResponseDTO);
-    }
+    }*/
 
 
 }
