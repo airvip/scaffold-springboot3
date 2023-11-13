@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import org.junit.jupiter.api.Test;
+import wang.diff.scaffold.common.enums.RedisKeyInfo;
 import wang.diff.scaffold.common.util.MiscUtils;
 
 import java.text.SimpleDateFormat;
@@ -99,6 +100,22 @@ public class MiscUtilsTest {
         final String endDate = DateUtil.format(realEndDate, "yyyy-MM-dd");
         System.out.println(beginDate);
         System.out.println(endDate);
+    }
+
+
+    @Test
+    public void test8() {
+        final String key = RedisKeyInfo.generateKey(RedisKeyInfo.USER_LIST, "1");
+        System.out.println(key);
+    }
+
+    @Test
+    public void test9() {
+        int split = 15;
+        for (int i = 0; i < split; i = i+7) {
+            System.out.println(i/7);
+        }
+
     }
 
 }
