@@ -15,6 +15,7 @@ import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import java.util.HashMap;
 import java.util.Map;
 
+//@ConditionalOnProperty(name = "spring.kafka.bootstrap-servers", havingValue = "127.0.0.1:9092")
 @Configuration
 public class KafkaSyncConsumerConfig {
 

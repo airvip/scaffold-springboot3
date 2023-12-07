@@ -12,6 +12,7 @@ import wang.diff.scaffold.common.constant.KafkaTopicConfig;
 
 import java.time.Duration;
 
+//@ConditionalOnProperty(name = "spring.kafka.bootstrap-servers", havingValue = "127.0.0.1:9092")
 @Configuration
 public class KafkaSyncProducerConfig {
 

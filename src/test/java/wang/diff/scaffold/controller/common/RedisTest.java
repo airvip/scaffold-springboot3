@@ -6,6 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Metrics;
+import org.springframework.data.geo.Point;
+import org.springframework.data.redis.core.GeoOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import wang.diff.scaffold.common.util.MiscUtils;
@@ -20,6 +24,20 @@ import java.util.concurrent.TimeUnit;
 public class RedisTest {
     @Resource
     private RedisTemplate<String, String> redisTemplate;
+
+    @Test
+    public void computeDistanceByRedis() {
+        final GeoOperations<String, String> stringStringGeoOperations = redisTemplate.opsForGeo();
+        stringStringGeoOperations.add("geo", new Point(116.343328,39.947246) , "北京动物园");
+        stringStringGeoOperations.add("geo", new Point(116.404269, 39.914492), "北京天安门");
+        final Distance distance = stringStringGeoOperations.distance("geo", "北京动物园", "北京天安门");
+        log.info("distance:{}", distance);
+
+        final Distance dis = stringStringGeoOperations.distance("geo", "北京动物园", "北京天安门", Metrics.KILOMETERS);
+        assert dis != null;
+        log.info("distance:{} {}", dis.getValue(), dis.getMetric());
+
+    }
 
     @Test
     public void opRedisTest() {

@@ -1,4 +1,4 @@
-package wang.diff.scaffold.controller.customer;
+package wang.diff.scaffold.controller.client;
 
 
 import io.swagger.v3.oas.annotations.tags.Tag;
